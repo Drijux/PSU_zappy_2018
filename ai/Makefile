@@ -1,29 +1,29 @@
 ##
 ## EPITECH PROJECT, 2019
-## PSU_zappy
+## zappy_ai
 ## File description:
-## makefile
+## Makefile of zappy_ai project
 ##
 
-NAME			=	zappy_server
+NAME			=	zappy_ai
 
-SRC_DIR			= 	./src/
+SRC_DIR			=	./src/
 
-SRC_FILES		=	main.c
+SRC_FILES		=	main.cpp
 
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
-OBJ				=	$(SRC:.c=.o)
+OBJ				=	$(SRC:.cpp=.o)
 
 CPPFLAGS		+=	-I./include/
 
-CFLAGS			+=	-Wextra -Wall -Werror
+CXXFLAGS		+=	-Wall -Wextra -Werror
 
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) -o $(NAME) $(OBJ)
+			$(CXX) -o $(NAME) $(OBJ)
 
 clean:
 			$(RM) $(OBJ)

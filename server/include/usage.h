@@ -18,4 +18,6 @@ static const char USAGE[] = {
     "freq\t\tis the reciprocal of time unit for execution of actions\n"
 };
 
+void help(void);
+
 #endif /* USAGE_H_ */

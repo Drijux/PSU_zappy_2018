@@ -10,13 +10,6 @@
 #include <stdio.h>
 #include "server.h"
 
-void free_struct(info_game_t *info)
-{
-    for (int i = 0; info->name_team[i]; ++i)
-        free(info->name_team[i]);
-    free(info->name_team);
-}
-
 bool check_name(info_game_t *info, char **av)
 {
     int nb_team = 1;
@@ -29,6 +22,7 @@ bool check_name(info_game_t *info, char **av)
         perror("Failed malloc creation team");
         return (false);
     }
+    info->nb_team = nb_team - 1;
     info->name_team[nb_team - 1] = NULL;
     for (int i = 0; i < nb_team - 1; ++i) {
         if ((info->name_team[i] = strdup(av[i + 1])) == NULL) {

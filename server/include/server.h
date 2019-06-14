@@ -11,17 +11,30 @@
 static const int FAILURE = 84;
 static const int SUCCESS = 0;
 static const int NB_CMD = 6;
-static const int STDERR_FILENO = 2;
 
 #include <stdbool.h>
 
+typedef struct client
+{
+    int x;
+    int y;
+} client_t;
+
+typedef struct team
+{
+    char *name;
+    int nb_clt;
+    client_t *client;
+} team_t;
 
 typedef struct info_game {
+    int sd;
     int port;
     int width;
     int heigth;
     int nb_clt;
     int freq;
+    int nb_team;
     char **name_team;
 } info_game_t;
 
@@ -52,6 +65,7 @@ bool handle_error(int , char **, info_game_t *);
 int print_usage(int );
 bool check_name(info_game_t *, char **);
 
-void free_struct(info_game_t *);
+bool init_serv(info_game_t *);
 
+int server(info_game_t *);
 #endif /* SERVER_H_ */

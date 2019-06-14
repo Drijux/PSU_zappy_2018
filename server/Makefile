@@ -9,12 +9,15 @@ NAME			=	zappy_server
 
 SRC 			=	src/main.c
 
+# source of handle error
 SRC 			+= 	src/handle_error/handle_err.c 		\
 					src/handle_error/init_struct.c  	\
 					src/handle_error/check_arg_nb.c 	\
 					src/handle_error/check_arg_str.c
 
-# SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+# source of initiation server
+SRC 			+= 	src/init_serv/init_serv.c 	\
+					src/init_serv/server.c
 
 OBJ				=	$(SRC:.c=.o)
 
@@ -27,13 +30,14 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			$(CC) -o $(NAME) $(OBJ)
-			mv $(NAME) ..
+# 			mv $(NAME) ..
 
 clean:
 			$(RM) $(OBJ)
 
 fclean:		clean
-			$(RM) ../$(NAME)
+# 			$(RM) ../$(NAME)
+			$(RM) $(NAME)
 
 re:			fclean all
 

@@ -14,6 +14,5 @@ int main(int ac, char **av, char **envp)
 
 	if (!envp[0] || ac < 13 || !handle_error(ac - 1, av + 1, &info))
 		return (print_usage(FAILURE));
-    free_struct(&info);
-	return (SUCCESS);
+	return (server(&info));
 }

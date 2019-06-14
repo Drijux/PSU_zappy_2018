@@ -1,5 +1,6 @@
 *.o
 *~
+vgcore.*
 
 zappy_server
 zappy_ai

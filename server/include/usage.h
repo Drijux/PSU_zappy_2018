@@ -15,7 +15,7 @@ static const char USAGE[] = {
     "heigth\t\tis the heigth of the world\n\tnameX\t\tis the name of the "
     "team X\n\t"
     "clientsNB\tis the number of authorized clientsper team\n\t"
-    "freq\t\tis the reciprocal of time unit for execution of actions\n"
+    "freq\t\tis the reciprocal of time unit for execution of actions"
 };
 
 #endif /* USAGE_H_ */

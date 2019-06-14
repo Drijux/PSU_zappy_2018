@@ -5,13 +5,15 @@
 ** main function of project
 */
 
+#include <stdlib.h>
 #include "server.h"
 
 int main(int ac, char **av, char **envp)
 {
-	(void)av;
+    info_game_t info;
 
-	if (!envp[0] || ac < 13)
-		return (MY_EXIT_ERROR);
-	return (MY_EXIT_SUCCESS);
+	if (!envp[0] || ac < 13 || !handle_error(ac - 1, av + 1, &info))
+		return (print_usage(FAILURE));
+    free_struct(&info);
+	return (SUCCESS);
 }

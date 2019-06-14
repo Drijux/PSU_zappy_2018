@@ -7,17 +7,20 @@
 
 NAME			=	zappy_server
 
-SRC_DIR			= 	./src/
+SRC 			=	src/main.c
 
-SRC_FILES		=	main.c
+SRC 			+= 	src/handle_error/handle_err.c 		\
+					src/handle_error/init_struct.c  	\
+					src/handle_error/check_arg_nb.c 	\
+					src/handle_error/check_arg_str.c
 
-SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+# SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ				=	$(SRC:.c=.o)
 
 CPPFLAGS		+=	-I./include/
 
-CFLAGS			+=	-Wextra -Wall -Werror
+CFLAGS			+=	-Wextra -Wall
 
 
 all:		$(NAME)

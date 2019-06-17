@@ -25,15 +25,16 @@ SRC 			+= 	src/server/server.c 	\
 
 SRC 			+= 	src/action/forward.c 		\
 					src/action/broadcast.c 		\
-					src/action/right.c
-# 					src/action/connect_nbr 		\
-# 					src/action/incantation.c 	\
-# 					src/action/inventory.c 		\
-# 					src/action/look.c 			\
-# 					src/action/my_eject.c 		\
-# 					src/action/my_fork.c 		\
-# 					src/action/set_object.c 	\
-# 					src/action/take_object.c
+					src/action/right.c 			\
+					src/action/incantation.c 	\
+					src/action/inventory.c 		\
+					src/action/look.c 			\
+					src/action/my_eject.c 		\
+					src/action/my_fork.c 		\
+					src/action/set_object.c 	\
+					src/action/take_object.c 	\
+					src/action/left.c 			\
+					src/action/connect_nbr.c 	\
 
 OBJ				=	$(SRC:.c=.o)
 

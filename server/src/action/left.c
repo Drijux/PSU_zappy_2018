@@ -10,5 +10,6 @@
 
 void left(team_t *team)
 {
-    printf("left");
+    (void)team;
+    dprintf(1, "left");
 }

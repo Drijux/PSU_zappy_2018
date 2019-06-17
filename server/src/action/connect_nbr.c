@@ -10,5 +10,6 @@
 
 void connect_nbr(team_t *team)
 {
+    (void)team;
     printf("connect_nbr");
 }

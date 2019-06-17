@@ -10,5 +10,6 @@
 
 void my_eject(team_t *team)
 {
-    printf("my_eject");
+    (void)team;
+    dprintf(1, "my_eject");
 }

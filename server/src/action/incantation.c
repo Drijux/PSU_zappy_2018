@@ -10,5 +10,6 @@
 
 void incantation(team_t *team)
 {
-    printf("incantation");
+    (void)team;
+    dprintf(1, "incantation");
 }

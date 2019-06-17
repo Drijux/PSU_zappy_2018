@@ -10,5 +10,6 @@
 
 void inventory(team_t *team)
 {
-    printf("inventory");
+    (void)team;
+    dprintf(1, "inventory");
 }

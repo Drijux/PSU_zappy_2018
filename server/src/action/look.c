@@ -10,5 +10,6 @@
 
 void look(team_t *team)
 {
-    printf("look");
+    (void)team;
+    dprintf(1, "look");
 }

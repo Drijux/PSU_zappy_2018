@@ -10,5 +10,6 @@
 
 void my_fork(team_t *team)
 {
-    printf("my_fork");
+    (void)team;
+    dprintf(1, "my_fork");
 }

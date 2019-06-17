@@ -10,5 +10,6 @@
 
 void take_object(team_t *team)
 {
-    printf("take_object");
+    (void)team;
+    dprintf(1, "take_object");
 }

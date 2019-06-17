@@ -25,12 +25,13 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			$(CC) -o $(NAME) $(OBJ)
+			mv $(NAME) ..
 
 clean:
 			$(RM) $(OBJ)
 
 fclean:		clean
-			$(RM) $(NAME)
+			$(RM) ../$(NAME)
 
 re:			fclean all
 

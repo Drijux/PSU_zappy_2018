@@ -5,15 +5,15 @@
 ## Makefile of zappy project
 ##
 
-zappy_server:
+all:
+				$(MAKE) -C server/
 				$(MAKE) -C ai/
 
-zappy_ai:
+zappy_server:
 				$(MAKE) -C server/
 
-all:
-				zappy_server
-				zappy_ai
+zappy_ai:
+				$(MAKE) -C ai/
 
 clean:
 				$(MAKE) clean -C server/

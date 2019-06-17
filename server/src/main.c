@@ -13,5 +13,6 @@ int main(int ac, char **av, char **envp)
 
 	if (!envp[0] || ac < 13)
 		return (MY_EXIT_ERROR);
+	
 	return (MY_EXIT_SUCCESS);
 }

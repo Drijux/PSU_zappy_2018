@@ -12,7 +12,7 @@ Client::Client()
 {
 	_sock = -1;
 	_port = 0;
-	_addr = "";	
+	_addr = "";
 }
 
 bool Client::create_socket()

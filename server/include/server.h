@@ -11,7 +11,6 @@
 static const int FAILURE = 84;
 static const int SUCCESS = 0;
 static const int NB_CMD = 6;
-static const int STDERR_FILENO = 2;
 
 #include <stdbool.h>
 

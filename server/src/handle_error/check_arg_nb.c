@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <unistd.h>
 #include "server.h"
 
 bool check_port(info_game_t *info, char **av)

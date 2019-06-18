@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdio.h>
 #include "server.h"
@@ -15,6 +16,28 @@ void free_struct(info_game_t *info)
     for (int i = 0; info->name_team[i]; ++i)
         free(info->name_team[i]);
     free(info->name_team);
+}
+
+static bool check_team_nbr(int nb_team)
+{
+    if (nb_team <= 1) {
+        dprintf(STDERR_FILENO,"Error: Number of team is incorrect\n");
+        return (false);
+    }
+    return (true);
+}
+
+static bool check_team_name(char **name_team)
+{
+    for (int i = 0; name_team[i] != NULL; ++i) {
+        for (int j = 0; name_team[j] != NULL; ++j) {
+            if (j != i && strcmp(name_team[i], name_team[j]) == 0) {
+                dprintf(2, "Error: Team name are same between\n");
+                return (false);
+            }
+        }
+    }
+    return (true);
 }
 
 bool check_name(info_game_t *info, char **av)
@@ -36,5 +59,7 @@ bool check_name(info_game_t *info, char **av)
             return (false);
         }
     }
+    if (!check_team_nbr(nb_team - 1) || !check_team_name(info->name_team))
+        return (false);
     return (true);
 }

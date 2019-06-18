@@ -14,6 +14,6 @@ void init_struct(info_game_t *info)
     info->width = -1;
     info->heigth = -1;
     info->nb_clt = -1;
-    info->freq = -1;
+    info->freq = 100;
     info->name_team = NULL;
 }

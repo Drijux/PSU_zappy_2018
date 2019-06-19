@@ -29,7 +29,7 @@ bool Client::create_socket()
 	return true;
 }
 
-void Client::create_sockaddr_in(std::string str, int port)
+void Client::create_sockaddr_in(char *str, int port)
 {
 	_server.sin_addr.s_addr = inet_addr(str);
 	_server.sin_family = AF_INET;
@@ -38,7 +38,7 @@ void Client::create_sockaddr_in(std::string str, int port)
 
 bool Client::connection(std::string str, int port)
 {
-	if (connect(sock, (struct sockaddr *) &_server, sizeof(_server))) {
+	if (connect(_sock, (struct sockaddr *) &_server, sizeof(_server))) {
 		std::cout << "Connect failed" << std::endl;
 		return false;
 	}

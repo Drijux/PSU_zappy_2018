@@ -50,6 +50,7 @@ int main(int ac, char **av, char **envp)
 	if (!envp[0] || ac != 7)
 		return (MY_EXIT_ERROR);
 	argument = parse_arg(av);
-	//connect(argument);
+	Client client(argument);
+	client.preorder();
 	return (MY_EXIT_SUCCESS);
 }

@@ -18,14 +18,15 @@ static const int MY_EXIT_SUCCESS = 0;
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "structure.hpp"
 
 class Client
 {
 public:
-	Client();
+	Client(arg_t argument);
 	bool create_socket();
-	void create_sockaddr_in(char *addr, int port);
-	bool connection(std::string str, int port);
+	void create_sockaddr_in(std::string addr, int port);
+	bool connection(void);
 	bool loop(void);
 	bool preorder(void);
 private:

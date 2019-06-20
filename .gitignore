@@ -1,6 +1,9 @@
 *.o
 *~
 vgcore.*
+test.c
+question.txt
+servertest
 
 zappy_server
 zappy_ai

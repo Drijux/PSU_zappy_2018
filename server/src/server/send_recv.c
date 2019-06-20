@@ -12,8 +12,8 @@
 
 void send_msg(int id_clt, char *msg)
 {
-    dprintf(id_clt, "<--%s\n", msg);
-    dprintf(1, "<--%s\n", msg);
+    dprintf(id_clt, "%s\n", msg);
+    // dprintf(1, "%s\n", msg);
 }
 
 bool read_msg(int id_clt, char **msg)
@@ -23,6 +23,6 @@ bool read_msg(int id_clt, char **msg)
         perror("Failed read");
         return (false);
     }
-    dprintf(1, "-->%s", *msg);
+    dprintf(1, "%s", *msg);
     return (true);
 }

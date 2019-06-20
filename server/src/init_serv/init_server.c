@@ -37,10 +37,7 @@ team_t  *fill_struct_team(info_game_t *info)
 
 bool my_accept(int sd, int *id_clt)
 {
-    struct sockaddr_in clt;
-    socklen_t len = sizeof(clt);
-
-    if ((*id_clt = accept(sd, (struct sockaddr *)&clt, &len)) == -1) {
+    if ((*id_clt = accept(sd, NULL, NULL)) == -1) {
         perror("Failed accept");
         return (false);
     }

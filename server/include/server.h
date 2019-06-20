@@ -14,6 +14,7 @@ static const int NB_CMD = 6;
 static const int MAX_MSG = 1024;
 
 #include <stdbool.h>
+#include <poll.h>
 
 typedef struct client
 {
@@ -56,7 +57,7 @@ static const command_t COMMAND[] = {
     {"-x", check_width},
     {"-y", check_heigth},
     {"-n", check_name},
-    {"-s", check_nbclient},
+    {"-c", check_nbclient},
     {"-f", check_freq},
 };
 
@@ -73,5 +74,8 @@ void free_struct(team_t *, int );
 int server(info_game_t *);
 void send_msg(int , char *);
 bool read_msg(int , char **);
+
+void handle_poll(struct pollfd *, int *, int );
+bool my_poll(struct pollfd *, int , int *, int );
 
 #endif /* SERVER_H_ */

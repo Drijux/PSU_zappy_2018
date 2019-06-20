@@ -20,8 +20,10 @@ SRC 			+= 	src/init_serv/init_serv.c 	\
 					src/init_serv/init_server.c
 
 # source to launch server
-SRC 			+= 	src/server/server.c 	\
-					src/server/send_recv.c
+SRC 			+= 	src/server/server.c 		\
+					src/server/send_recv.c 		\
+					src/server/handle_poll.c 	\
+					src/server/my_poll.c
 
 SRC 			+= 	src/action/forward.c 		\
 					src/action/broadcast.c 		\

@@ -9,7 +9,7 @@
 # define USAGE_H_
 
 static const char USAGE[] = {
-    "USAGE: ./zappy_server -p port -x width -y heigth -n name1 name2 ... -s "
+    "USAGE: ./zappy_server -p port -x width -y heigth -n name1 name2 ... -c "
     "clientsNB -f freq\n\t"
     "port\t\tis the port number\n\twidth\t\tis the width of the world\n\t"
     "heigth\t\tis the heigth of the world\n\tnameX\t\tis the name of the "

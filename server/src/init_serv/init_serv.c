@@ -28,11 +28,11 @@ static bool my_bind(info_game_t *info, struct sockaddr_in *servaddr)
     return (true);
 }
 
-static void fill_struct_sockaddr(info_game_t *info, struct sockaddr_in *servaddr)
+static void fill_struct_sockaddr(info_game_t *info, struct sockaddr_in *serv)
 {
-    servaddr->sin_family = PF_INET;
-    servaddr->sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr->sin_port = htons(info->port);
+    serv->sin_family = PF_INET;
+    serv->sin_addr.s_addr = htonl(INADDR_ANY);
+    serv->sin_port = htons(info->port);
 }
 
 static bool my_listen(info_game_t * info)

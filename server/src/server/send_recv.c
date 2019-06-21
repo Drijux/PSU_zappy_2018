@@ -11,11 +11,11 @@
 #include <errno.h>
 #include "server.h"
 
-static bool my_str_isprintable(char const *str)
+static bool my_str_isprintable(char const *str, size_t size)
 {
-    if (str[0] == '\0')
+    if (str == NULL)
         return (false);
-    for (int i = 0; str[i] != '\0'; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         if (!(str[i] >= '!' && str[i] <= '~'))
             return (false);
     }
@@ -34,7 +34,7 @@ bool read_msg(int id_clt, char **msg)
         perror("Failed read");
         return (false);
     }
-    if (!my_str_isprintable(*msg))
+    if (!my_str_isprintable(*msg, strlen(*msg) - 2))
         return (false);
     return (true);
 }

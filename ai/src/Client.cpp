@@ -14,6 +14,7 @@ Client::Client(arg_t argument)
 	_sock = -1;
 	_port = atoi(argument.port);
 	_addr = argument.machine;
+	_team = argument.name;
 }
 
 bool Client::create_socket()
@@ -52,9 +53,11 @@ bool Client::connection(void)
 
 bool Client::loop(void)
 {
-
+	write(_sock, "FORWARD", 7);
+	char *str;
 	while (1) {
-		write(_sock, "FORWARD", 7);
+		read(_sock, &str, 2048);
+		dprintf(_sock, "CACA");
 		//Client send message to server
 	}
 	close(_sock);

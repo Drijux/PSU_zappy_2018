@@ -10,6 +10,7 @@ NAME			=	zappy_ai
 SRC_DIR			=	./src/
 
 SRC_FILES		=	Client.cpp	\
+					bot.cpp		\
 					main.cpp
 
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))

@@ -52,8 +52,8 @@ bool Client::connection(void)
 
 bool Client::loop(void)
 {
-	write(1, "I'm a bg", strlen("I'm a bg"));
 	while (1) {
+		//Client send message to server
 	}
 	close(_sock);
 }

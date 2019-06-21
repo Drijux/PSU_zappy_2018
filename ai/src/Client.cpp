@@ -52,7 +52,9 @@ bool Client::connection(void)
 
 bool Client::loop(void)
 {
+
 	while (1) {
+		write(_sock, "FORWARD", 7);
 		//Client send message to server
 	}
 	close(_sock);

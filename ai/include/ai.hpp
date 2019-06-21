@@ -33,6 +33,7 @@ private:
 	int _sock;
 	std::string _addr;
 	int _port;
+	std::string _team;
 	struct sockaddr_in _server;
 };
 

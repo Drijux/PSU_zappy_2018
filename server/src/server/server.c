@@ -52,7 +52,6 @@ static void run_serv(info_game_t *info)
     fd[0].events = POLLIN;
     handle_clt_poll(info, team, fd);
     free_struct(team, info->nb_team);
-
 }
 
 int server(info_game_t *info)

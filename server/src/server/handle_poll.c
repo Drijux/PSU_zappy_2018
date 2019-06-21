@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 #include "print.h"
 #include "server.h"
 
@@ -28,7 +30,7 @@ static void handle_new_msg(struct pollfd *fd)
 
     if (read_msg(fd->fd, &msg)) {
         // treat_msg(msg);
-        dprintf(1, "%s\n", msg);
+        dprintf(1, "%s", msg);
     }
     free(msg);
 }

@@ -14,7 +14,8 @@ bool my_poll(struct pollfd *fd, int nfds, int *vl, int time)
         perror("Failed poll");
         return (false);
     }
-    if (*vl == 0)
+    if (*vl == 0) {
         return (false);
+    }
     return (true);
 }

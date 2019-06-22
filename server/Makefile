@@ -44,9 +44,9 @@ SRC 			+= src/map/map.c
 
 OBJ				=	$(SRC:.c=.o)
 
-CPPFLAGS		+=	-I./include/
+CPPFLAGS		+=	-I./include/ -I/usr/local/include/
 
-# LDFLAGS			= 	-lSDL -lSDL_mixer
+LDFLAGS			= 	-L/usr/local/lib -lSDL
 
 CFLAGS			+=	-Wextra -Wall
 

@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-bool connect_nbr(client_t *clt
-    , map_t *map
-    , info_game_t *info)
+bool connect_nbr(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
     return (true);
 }

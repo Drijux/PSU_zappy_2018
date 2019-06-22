@@ -8,10 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-bool my_fork(client_t *clt
-    , map_t *map
-    , info_game_t *info)
+bool my_fork(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    dprintf(1, "my_fork");
     return (true);
 }

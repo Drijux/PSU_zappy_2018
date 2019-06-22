@@ -12,6 +12,7 @@ static const int FAILURE = 84;
 static const int SUCCESS = 0;
 static const int NB_CMD = 6;
 static const int MAX_MSG = 1024;
+#define UNUSED __attribute__((unused))
 
 #include <stdbool.h>
 #include <poll.h>
@@ -48,6 +49,7 @@ typedef struct client {
     int inventory[7];
     axe_t axe;
     msg_queue_t msg_queue[10];
+    char *file;
 } client_t;
 
 typedef struct info_game {

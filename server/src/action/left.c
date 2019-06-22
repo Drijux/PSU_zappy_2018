@@ -9,9 +9,16 @@
 #include "action.h"
 
 bool left(client_t *clt
-    , map_t *map
-    , info_game_t *info)
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    dprintf(1, "left");
+    if (clt->axe == NORTH)
+        clt->axe = WEST;
+    else if (clt->axe == SOUTH)
+        clt->axe = EAST;
+    else if (clt->axe == EAST)
+        clt->axe = NORTH;
+    else
+        clt->axe = SOUTH;
     return (true);
 }

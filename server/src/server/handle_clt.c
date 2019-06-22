@@ -14,15 +14,11 @@
 
 static void get_new_pos(client_t *client, map_t *map, info_game_t *info)
 {
-    int index = 0;
-    int axe = 0;
-
-    while (true) {
+    for (int index = 0, axe = 0; true;) {
         index = rand()%(info->width * info->heigth);
-        if (map[index].ground == true) {
+        if (map[index].ground == true && map[index].ress == false) {
             axe = rand()%4;
-            free(map[index].file);
-            map[index].file = strdup(GROUND);
+            client->file = strdup(PERSO);
             client->x = map[index].x;
             client->y = map[index].y;
             client->index_map = index;
@@ -31,17 +27,17 @@ static void get_new_pos(client_t *client, map_t *map, info_game_t *info)
             client->inventory[0] = 10;
             map[index].ground = false;
             map[index].perso = true;
-            break;
+            if (client->file != NULL)
+                break;
         }
+        free(client->file);
     }
 }
 
 static bool check_team(char *msg, info_game_t *info, int *save)
 {
-    if (strncmp(msg, "TEAM-", 5) != 0)
-        return (false);
     for (int i = 0; info->name_team[i]; ++i) {
-        if (strncmp(msg + 5, info->name_team[i], strlen(msg + 5) - 2) == 0) {
+        if (strncmp(msg, info->name_team[i], strlen(msg) - 2) == 0) {
             *save = i;
             return (true);
         }
@@ -70,7 +66,7 @@ bool check_new_clt(client_t *clt, map_t *map, info_game_t *info)
     while (true) {
         if ((mg = calloc(1024, sizeof(char))) != NULL && read_msg(clt->sd, &mg)
             && check_team(mg, info, &save)) {
-            clt->team_name = strdup(strncpy(mg, mg + 5, strlen(mg + 5) - 2));
+            clt->team_name = strdup(strncpy(mg, mg, strlen(mg) - 2));
             if (clt->team_name != NULL)
                 break;
         }

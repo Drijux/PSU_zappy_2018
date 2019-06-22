@@ -8,10 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-bool incantation(client_t *clt
-    , map_t *map
-    , info_game_t *info)
+bool incantation(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    dprintf(1, "incantation");
     return (true);
 }

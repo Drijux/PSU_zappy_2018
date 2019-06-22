@@ -8,10 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-bool broadcast(client_t *clt
-    , map_t *map
-    , info_game_t *info)
+bool broadcast(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    dprintf(1, "broadcast");
     return (true);
 }

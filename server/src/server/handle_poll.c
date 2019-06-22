@@ -51,10 +51,8 @@ static void handle_new_msg(client_t *clt
 {
     char *msg = calloc(MAX_MSG, sizeof(char));
 
-    if (read_msg(clt->sd, &msg)) {
+    if (read_msg(clt->sd, &msg))
         treat_msg(msg, clt, info, map);
-        dprintf(1, "%s", msg);
-    }
     free(msg);
 }
 
@@ -75,7 +73,8 @@ void handle_poll(struct pollfd *fd
             info->nfds += handle_new_clt(&fd[info->nfds]
                 , info, &clt[info->nfds], map);
         }
-        if (fd[i].revents == POLLIN && fd[i].fd != fd[0].fd)
-            handle_new_msg(&clt[info->nfds], info, map);
+        if (fd[i].revents == POLLIN && fd[i].fd != fd[0].fd) {
+            handle_new_msg(&clt[i], info, map);
+        }
     }
 }

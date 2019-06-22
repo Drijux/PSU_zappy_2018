@@ -2,7 +2,7 @@
 // EPITECH PROJECT, 2019
 // zappy_ai
 // File description:
-// .h for zappy_ai project
+// header file of zappy_ai project
 //
 
 #ifndef AI_HPP_

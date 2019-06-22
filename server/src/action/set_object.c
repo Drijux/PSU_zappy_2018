@@ -8,8 +8,10 @@
 #include <stdio.h>
 #include "action.h"
 
-void set_object(team_t *team)
+bool set_object(client_t *clt
+    , map_t *map
+    , info_game_t *info)
 {
-    (void)team;
     dprintf(1, "set_object");
+    return (true);
 }

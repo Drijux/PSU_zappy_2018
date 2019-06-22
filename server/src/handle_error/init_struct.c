@@ -18,5 +18,7 @@ void init_struct(info_game_t *info)
     info->freq = 100;
     info->nb_team = 0;
     info->freq = 100;
+    info->nfds = 1;
+    info->clt_tot = 0;
     info->name_team = NULL;
 }

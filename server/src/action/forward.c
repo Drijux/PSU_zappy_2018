@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-void forward(team_t *team)
+bool forward(client_t *clt
+    , map_t *map
+    , info_game_t *info)
 {
-    (void)team;
-    dprintf(1, "forward");
+    return (true);
 }

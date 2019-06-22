@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-void connect_nbr(team_t *team)
+bool connect_nbr(client_t *clt
+    , map_t *map
+    , info_game_t *info)
 {
-    (void)team;
-    printf("connect_nbr");
+    return (true);
 }

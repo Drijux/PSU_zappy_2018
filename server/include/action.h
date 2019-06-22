@@ -10,24 +10,30 @@
 
 #include <server.h>
 
+#define MAX_ACTION 12
+
 typedef struct action {
     const char *name;
     const int len;
-    void (*function) (team_t *);
+    bool (*function) (client_t *clt, map_t *, info_game_t *);
 } action_t;
 
-void forward(team_t *);
-void broadcast(team_t *);
-void right(team_t *);
-void incantation(team_t *);
-void left(team_t *);
-void look(team_t *);
-void inventory(team_t *);
-void my_fork(team_t *);
-void my_eject(team_t *);
-void take_object(team_t *);
-void set_object(team_t *);
-void connect_nbr(team_t *);
+bool forward(client_t *clt, map_t *, info_game_t *);
+bool broadcast(client_t *clt, map_t *, info_game_t *);
+bool right(client_t *clt, map_t *, info_game_t *);
+bool incantation(client_t *clt, map_t *, info_game_t *);
+bool left(client_t *clt, map_t *, info_game_t *);
+bool look(client_t *clt, map_t *, info_game_t *);
+bool inventory(client_t *clt, map_t *, info_game_t *);
+bool my_fork(client_t *clt, map_t *, info_game_t *);
+bool my_eject(client_t *clt, map_t *, info_game_t *);
+bool take_object(client_t *clt, map_t *, info_game_t *);
+bool set_object(client_t *clt, map_t *, info_game_t *);
+bool connect_nbr(client_t *clt, map_t *, info_game_t *);
+// void map_size(team_t *);
+// void bct(team_t *);
+// void mct(team_t *);
+// void tna(team_t *);
 
 static const action_t MY_ACTION[] = {
     {"Forward", 7, forward},
@@ -42,6 +48,10 @@ static const action_t MY_ACTION[] = {
     {"Take object", 11, take_object},
     {"Set object", 10, set_object},
     {"Connect_nbr", 11, connect_nbr},
+    // {"msz", 3, map_size},
+    // {"bct", 3, bct},
+    // {"mct", 3, mct},
+    // {"tna", 3, tna},
 };
 
 #endif /* COMMAND_H_ */

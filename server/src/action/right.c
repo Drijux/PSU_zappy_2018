@@ -2,14 +2,16 @@
 ** EPITECH PROJECT, 2018
 ** zappy_server
 ** File description:
-** foward.c
+** right.c
 */
 
 #include <stdio.h>
 #include "action.h"
 
-void right(team_t *team)
+bool right(client_t *clt
+    , map_t *map
+    , info_game_t *info)
 {
-    (void)team;
     dprintf(1, "right");
+    return (true);
 }

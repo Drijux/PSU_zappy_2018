@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include <stdbool.h>
+#include "bot.hpp"
 #include "ai.hpp"
 
 Client::Client(arg_t argument)
@@ -53,14 +54,9 @@ bool Client::connection(void)
 
 bool Client::loop(void)
 {
-	write(_sock, "FORWARD", 7);
-	char *str;
-	while (1) {
-		read(_sock, &str, 2048);
-		dprintf(_sock, "CACA");
-		//Client send message to server
-	}
-	close(_sock);
+	Bot mybot = Bot(_sock, _name);
+
+	mybot.run()
 }
 
 bool Client::preorder(void)

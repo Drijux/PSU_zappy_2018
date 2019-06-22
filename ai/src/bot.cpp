@@ -19,8 +19,14 @@ _sock(sock), _team(team), _orderstack(FIRSTORDERS)
 Bot::~Bot(void)
 {}
 
-void Bot::botRun(void)
+void Bot::run(void)
 {
+    // char *order;
+
+    while (true) {
+        dprintf(_sock, "Forward");
+    }
+    close(_sock);
 }
 
 void Bot::botLogic(void)

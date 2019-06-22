@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2019
-** zappy
+** zappy_ai
 ** File description:
-** struct
+** Structure definitions
 */
 
-#ifndef structure
-#define structure
+#ifndef STRUCTURE_HPP_
+# define STRUCTURE_HPP_
 
 typedef struct argument {
     char *port;
@@ -14,4 +14,4 @@ typedef struct argument {
     char *machine;
 } arg_t;
 
-#endif /* !structure */
+#endif /* STRUCTURE_HPP_ */

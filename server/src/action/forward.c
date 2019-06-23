@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "action.h"
 
 static void check_fwd_map(client_t *clt, map_t *map, info_game_t *info)
@@ -37,6 +38,8 @@ bool forward(client_t *clt
     , map_t *map
     , info_game_t *info)
 {
+    double time = 0;
+
     if (clt->axe == NORTH)
         clt->y -= 1;
     else if (clt->axe == EAST)
@@ -46,5 +49,7 @@ bool forward(client_t *clt
     else
         clt->y += 1;
     check_forward(clt, map, info);
+    time = ((double)clock() / CLOCKS_PER_SEC) + (7 / info->freq);
+    add_msg_to_queue(clt, "ok", time);
     return (true);
 }

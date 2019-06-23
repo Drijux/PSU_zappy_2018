@@ -43,5 +43,6 @@ bool init_map(map_t *map, info_game_t *info)
             index++;
         }
     }
+    memset(&map[info->heigth * info->width], 0, sizeof(*map));
     return (true);
 }

@@ -26,6 +26,7 @@ static int handle_new_clt(struct pollfd *fd
         return (0);
     }
     clt->sd = fd->fd;
+    memset(&clt->msg_queue, 0, sizeof(clt->msg_queue));
     send_msg(clt->sd, WELCOME);
     if (!check_new_clt(clt, map, info))
         return (0);

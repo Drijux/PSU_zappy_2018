@@ -37,19 +37,21 @@ typedef enum axe {
 
 typedef struct msg_queue {
     char *msg;
-    clock_t time_end;
+    double time_end;
 } msg_queue_t;
 
 typedef struct client {
     int sd;
     int x;
     int y;
+    int lvl;
     char *team_name;
     int index_map;
     int inventory[7];
     axe_t axe;
-    msg_queue_t msg_queue[10];
+    msg_queue_t msg_queue[11];
     char *file;
+    char *msg;
 } client_t;
 
 typedef struct info_game {
@@ -116,5 +118,8 @@ void handle_poll(struct pollfd *, info_game_t *, map_t *, client_t *);
 bool init_map(map_t *, info_game_t *);
 void free_map_info(map_t *, info_game_t *);
 bool check_new_clt(client_t *, map_t *, info_game_t *);
+
+void add_msg_to_queue(client_t *, char *, double );
+void handle_msg_queue(client_t *, info_game_t *);
 
 #endif /* SERVER_H_ */

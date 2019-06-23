@@ -11,6 +11,7 @@
 #include <server.h>
 
 #define MAX_ACTION 12
+#define LEN_MAX 5000
 
 typedef struct action {
     const char *name;

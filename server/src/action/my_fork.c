@@ -6,11 +6,21 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "action.h"
 
-bool my_fork(UNUSED client_t *clt
+bool my_fork(client_t *clt
     , UNUSED map_t *map
-    , UNUSED info_game_t *info)
+    , info_game_t *info)
 {
+    int i = 0;
+
+    for (; info->name_team[i]; ++i) {
+        if (strcmp(info->name_team[i], clt->team_name) == 0)
+            break;
+    }
+    info->client_per_team[i] += 1;
+    add_msg_to_queue(clt, "ok", 0.0);
+    info->nfds++;
     return (true);
 }

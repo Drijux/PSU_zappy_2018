@@ -14,6 +14,22 @@ Mybot::Mybot(int sock, std::string team) : _sock(sock), _team(team)
 Mybot::~Mybot(void)
 {}
 
+char *Mybot::sendMessage(std::string message)
+{
+    static char buffer[2048];
+    int size = 0;
+
+    dprintf(_sock, "%s\n", message.c_str());
+    size = read(_sock, buffer, sizeof(buffer));
+    buffer[size] = '\0';
+    return (buffer);
+}
+
+void Mybot::look(void)
+{
+    std::string response = sendMessage("Look");
+}
+
 int Mybot::run(void)
 {
     char buffer[1024];
@@ -26,4 +42,3 @@ int Mybot::run(void)
     }
     return (SUCCESS);
 }
-

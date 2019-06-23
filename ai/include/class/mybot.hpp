@@ -18,6 +18,8 @@ class Mybot
         ~Mybot(void);
 
         int run(void);
+        void look(void);
+        char *sendMessage(std::string message);
 
     private:
         int _sock;

@@ -16,7 +16,7 @@ static bool my_str_isprintable(char const *str, size_t size)
     if (str == NULL)
         return (false);
     for (size_t i = 0; i < size; ++i) {
-        if (!(str[i] >= '!' && str[i] <= '~'))
+        if (!(str[i] >= ' ' && str[i] <= '~'))
             return (false);
     }
     return (true);

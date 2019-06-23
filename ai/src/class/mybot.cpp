@@ -31,42 +31,41 @@ void Mybot::look(void)
     std::string response = sendMessage("Look");
 }
 
-void Mybot::early(char *buf)
-{
-    // int ret = 0;
+// int Mybot::run(void)
+// {
+//     char *buffer = (char *)calloc(1024, sizeof(char));
+//     int ret = 0;
 
-    (void)buf;
-    dprintf(_sock, "%s\n", _team.c_str());
-    // std::memset(buf, 0, 1023);
-    // if ((ret = read(_sock, buf, 1024)) > 0)
-    //     dprintf(1, "%s\n", _team.c_str());
-    // std::memset(buf, 0, 1023);
-    // if ((ret = read(_sock, buf, 1024)) > 0)
-    //     dprintf(1, "%s\n", _team.c_str());
-}
-
-void Mybot::treat_msg(char *buf, int ret)
-{
-    if (std::strncmp("WELCOME", buf, ret - 2) == 0)
-        early(buf);
-    else
-        dprintf(_sock, "Forward\n");
-}
+//     while (true) {
+//         if ((ret = read(_sock, buffer, 1024)) > 0) {
+//             dprintf(1, "%s", buffer);
+//             treat_msg(buffer, ret);
+//         }
+//         std::memset(buffer, 0, 1023);
+//     }
+//     free(buffer);
+//     while(true);
+//     close(_sock);
+//     return (SUCCESS);
+// }
 
 int Mybot::run(void)
 {
-    // char *buffer = (char *)calloc(1024, sizeof(char));
-    // int ret = 0;
+    char buffer[2048] = "ok";
+    int reader = 2;
 
-    // while (true) {
-    //     if ((ret = read(_sock, buffer, 1024)) > 0) {
-    //         dprintf(1, "%s", buffer);
-    //         treat_msg(buffer, ret);
-    //     }
-    //     std::memset(buffer, 0, 1023);
-    // }
-    // free(buffer);
-    while(true);
+    while (true) {
+        if (reader > 0 && !std::strcmp("ok", buffer)) {
+            dprintf(_sock, "Forward\n");
+            printf("Forward\n");
+        }
+        if (reader > 0 && !std::strcmp("dead", buffer)) {
+            std::cout << "The bot is dead, long live the bot" << std::endl;
+            break;
+        }
+        reader = read(_sock, buffer, 2048);
+        buffer[reader - 1] = '\0';
+    }
     close(_sock);
     return (SUCCESS);
 }

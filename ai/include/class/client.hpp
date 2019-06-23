@@ -27,6 +27,7 @@ class Client
 
         int launch(void);
         int startBot(void);
+        int callServer(void);
         bool connection(void);
         bool createSocket(void);
         void createSockaddrIn(void);

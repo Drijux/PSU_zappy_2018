@@ -5,6 +5,8 @@
 ** methods of client class
 */
 
+#include <cstring>
+
 #include "parameter.hpp"
 #include "client.hpp"
 
@@ -38,12 +40,40 @@ bool Client::createSocket(void)
     return (true);
 }
 
+int Client::callServer(void)
+{
+    char buffer[1024];
+    int reader = 0;
+    int stack = 0;
+    int nbclient = 0;
+
+    while (true) {
+        reader = read(_sock, buffer, 1024);
+        buffer[reader - 1] = '\0';
+        if (!std::strcmp("WELCOME", buffer)) {
+            dprintf(_sock, "%s\n", _team.c_str());
+            stack += 1;
+        } else if (stack == 1 && reader > 0) {
+            nbclient = atoi(buffer);
+            stack += 1;
+        } else if ((stack == 2 && reader > 0) || \
+        (stack == 2 && nbclient < 1))
+            break;
+    }
+    return (nbclient);
+}
+
 bool Client::connection(void)
 {
     if (connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) == -1) {
 		perror("Client::connect : Failed to connect client");
         return (false);
 	}
+    if (callServer() < 1) {
+        close(_sock);
+        return (false);
+    }
+    std::cout << "Connection established" << std::endl;
     return (true);
 }
 

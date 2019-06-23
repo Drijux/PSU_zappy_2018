@@ -55,17 +55,18 @@ void Mybot::treat_msg(char *buf, int ret)
 
 int Mybot::run(void)
 {
-    char *buffer = (char *)calloc(1024, sizeof(char));
-    int ret = 0;
+    // char *buffer = (char *)calloc(1024, sizeof(char));
+    // int ret = 0;
 
-    while (true) {
-        if ((ret = read(_sock, buffer, 1024)) > 0) {
-            dprintf(1, "%s", buffer);
-            treat_msg(buffer, ret);
-        }
-        std::memset(buffer, 0, 1023);
-    }
-    free(buffer);
+    // while (true) {
+    //     if ((ret = read(_sock, buffer, 1024)) > 0) {
+    //         dprintf(1, "%s", buffer);
+    //         treat_msg(buffer, ret);
+    //     }
+    //     std::memset(buffer, 0, 1023);
+    // }
+    // free(buffer);
+    while(true);
     close(_sock);
     return (SUCCESS);
 }

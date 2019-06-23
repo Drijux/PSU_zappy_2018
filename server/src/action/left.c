@@ -5,13 +5,17 @@
 ** left.c
 */
 
+#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "action.h"
 
 bool left(client_t *clt
     , UNUSED map_t *map
     , UNUSED info_game_t *info)
 {
+    double time = 0;
+
     if (clt->axe == NORTH)
         clt->axe = WEST;
     else if (clt->axe == SOUTH)
@@ -20,5 +24,7 @@ bool left(client_t *clt
         clt->axe = NORTH;
     else
         clt->axe = SOUTH;
+    time = ((double)clock() / CLOCKS_PER_SEC) + (7 / info->freq);
+    add_msg_to_queue(clt, "ok", time);
     return (true);
 }

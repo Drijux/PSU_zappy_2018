@@ -28,8 +28,8 @@ static void free_clts(client_t *clients, int nb)
 static void fill_struct_clts(client_t *clts, int nb)
 {
     for (int i = 0; i < nb; ++i) {
-        clts[i].team_name = NULL;
-        clts[i].file = NULL;
+        memset(&clts[i], 0, sizeof(clts[i]));
+        clts[i].inventory[0] = 10;
     }
 }
 
@@ -52,6 +52,7 @@ static void fill_struct_clts(client_t *clts, int nb)
 //     }
 //     free_clts(clients, (info->clt_tot + 1));
 // }
+
 static void handle_clt_poll(info_game_t *info
     , struct pollfd *fd
     , map_t *map)
@@ -59,12 +60,13 @@ static void handle_clt_poll(info_game_t *info
     int vl = 0;
     client_t clients[info->clt_tot + 1];
     clients[0].sd = fd[0].fd;
-    // SDL_Event event;
 
     fill_struct_clts(clients, (info->clt_tot + 1));
     while (true) {
-        if (my_poll(fd, info->nfds, &vl, 0))
+        if (my_poll(fd, info->nfds, &vl, 0)) {
             handle_poll(fd, info, map, clients);
+        }
+        handle_msg_queue(clients, info);
     }
     free_clts(clients, (info->clt_tot + 1));
 }
@@ -82,7 +84,7 @@ static void run_serv(info_game_t *info, map_t *map)
 
 int server(info_game_t *info)
 {
-    map_t map[info->heigth * info->width];
+    map_t map[(info->heigth * info->width) + 1];
 
     if (map == NULL || !init_map(map, info))
         return (FAILURE);

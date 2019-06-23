@@ -23,6 +23,7 @@ static void get_new_pos(client_t *client, map_t *map, info_game_t *info)
             client->y = map[index].y;
             client->index_map = index;
             client->axe = axe;
+            client->lvl = 1;
             memset(&client->inventory, 0, sizeof(client->inventory));
             client->inventory[0] = 10;
             map[index].ground = false;
@@ -66,7 +67,7 @@ bool check_new_clt(client_t *clt, map_t *map, info_game_t *info)
     while (true) {
         if ((mg = calloc(1024, sizeof(char))) != NULL && read_msg(clt->sd, &mg)
             && check_team(mg, info, &save)) {
-            clt->team_name = strdup(strncpy(mg, mg, strlen(mg) - 2));
+            clt->team_name = strndup(mg, strlen(mg) - 2);
             if (clt->team_name != NULL)
                 break;
         }

@@ -42,6 +42,8 @@ SRC 			+= 	src/action/forward.c 		\
 # source to handle map
 SRC 			+= src/map/map.c
 
+SRC 			+= src/msg_queue/msg_queue.c
+
 OBJ				=	$(SRC:.c=.o)
 
 CPPFLAGS		+=	-I./include/ -I/usr/local/include/

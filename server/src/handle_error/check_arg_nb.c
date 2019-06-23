@@ -34,8 +34,8 @@ bool check_width(info_game_t *info, char **av)
             dprintf(STDERR_FILENO, "Failed: Number is incorrect\n");
         return (false);
     }
-    if (info->width < 1) {
-        dprintf(STDERR_FILENO, "Failed: Expected width upper than 0\n");
+    if (info->width < 11) {
+        dprintf(STDERR_FILENO, "Failed: Expected width upper than 10\n");
         return (false);
     }
     return (true);
@@ -48,8 +48,8 @@ bool check_heigth(info_game_t *info, char **av)
             dprintf(STDERR_FILENO, "Failed: Number is incorrect\n");
         return (false);
     }
-    if (info->heigth < 1) {
-        dprintf(STDERR_FILENO, "Failed: Expected heigth upper than 0\n");
+    if (info->heigth < 11) {
+        dprintf(STDERR_FILENO, "Failed: Expected heigth upper than 10\n");
         return (false);
     }
     return (true);

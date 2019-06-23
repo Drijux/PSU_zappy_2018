@@ -9,23 +9,30 @@ NAME			=	zappy_ai
 
 SRC_DIR			=	./src/
 
-SRC_FILES		=	Client.cpp	\
+CLASS_DIR		=	./src/class/
+
+SRC_FILES		=	argument.cpp	\
 					main.cpp
+
+CLASS_FILES		=	client.cpp	\
+					mybot.cpp
 
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 
-OBJ				=	$(SRC:.cpp=.o)
+CLASS			=	$(addprefix $(CLASS_DIR), $(CLASS_FILES))
 
-CPPFLAGS		+=	-I./include/
+OBJ				=	$(SRC:.cpp=.o)	\
+					$(CLASS:.cpp=.o)
 
-CXXFLAGS		+=	-Wall -Wextra -Werror
+CPPFLAGS		+=	-I./include/ -I./include/class/
+
+CXXFLAGS		+=	-Wall -Wextra  -Werror
 
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CXX) -o $(NAME) $(OBJ)
-			mv $(NAME) ..
+			$(CXX) -o ../$(NAME) $(OBJ)
 
 clean:
 			$(RM) $(OBJ)

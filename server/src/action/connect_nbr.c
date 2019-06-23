@@ -12,7 +12,8 @@
 
 bool connect_nbr(client_t *clt
     , UNUSED map_t *map
-    , info_game_t *info)
+    , info_game_t *info
+    , UNUSED char *msg)
 {
     int i = 0;
 

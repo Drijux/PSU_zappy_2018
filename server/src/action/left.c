@@ -12,7 +12,8 @@
 
 bool left(client_t *clt
     , UNUSED map_t *map
-    , UNUSED info_game_t *info)
+    , info_game_t *info
+    , UNUSED char *msg)
 {
     double time = 0;
 

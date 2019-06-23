@@ -13,7 +13,8 @@
 
 bool inventory(client_t *clt
     , UNUSED map_t *map
-    , UNUSED info_game_t *info)
+    , info_game_t *info
+    , UNUSED char *msg)
 {
     char buff[20];
     double time = 0;

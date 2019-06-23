@@ -40,7 +40,7 @@ static void treat_msg(char *msg
 {
     for (int i = 0; i < MAX_ACTION; ++i) {
         if (strncmp(MY_ACTION[i].name, msg, MY_ACTION[i].len) == 0
-            && MY_ACTION[i].function(clt, map, info))
+            && MY_ACTION[i].function(clt, map, info, msg + MY_ACTION[i].len))
             return;
     }
     dprintf(clt->sd, "ko\n");
@@ -52,8 +52,9 @@ static void handle_new_msg(client_t *clt
 {
     char *msg = calloc(MAX_MSG, sizeof(char));
 
-    if (read_msg(clt->sd, &msg))
+    if (read_msg(clt->sd, &msg)) {
         treat_msg(msg, clt, info, map);
+    }
     free(msg);
 }
 

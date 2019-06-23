@@ -22,8 +22,8 @@ static bool check_team_nbr(int nb_team)
 
 static bool check_team_name(char **name_team)
 {
-    for (int i = 0; name_team[i] != NULL; ++i) {
-        for (int j = 0; name_team[j] != NULL; ++j) {
+    for (int i = 0; name_team[i] != NULL; i++) {
+        for (int j = 0; name_team[j] != NULL; j++) {
             if (j != i && strcmp(name_team[i], name_team[j]) == 0) {
                 dprintf(2, "Error: Team name are same between\n");
                 return (false);
@@ -33,27 +33,45 @@ static bool check_team_name(char **name_team)
     return (true);
 }
 
-bool check_name(info_game_t *info, char **av)
+static int get_nb_team(char **av)
 {
     int nb_team = 1;
 
-    for (; av[nb_team] != NULL; nb_team++) {
+    for (; av[nb_team]; nb_team++) {
         if (av[nb_team][0] == '-')
             break;
     }
-    if ((info->name_team = malloc(sizeof(char *) * (nb_team))) == NULL) {
+    return (nb_team - 1);
+}
+
+static bool my_malloc(info_game_t * info, int nb_team)
+{
+    if ((info->name_team = malloc(sizeof(char *) * (nb_team + 1))) == NULL) {
         perror("Failed malloc creation team");
         return (false);
     }
-    info->nb_team = nb_team - 1;
-    info->name_team[nb_team - 1] = NULL;
-    for (int i = 0; i < nb_team - 1; ++i) {
+    if ((info->client_per_team = calloc(nb_team, sizeof(int))) == NULL) {
+        perror("Failed calloc creation of int *");
+        return (false);
+    }
+    return (true);
+}
+
+bool check_name(info_game_t *info, char **av)
+{
+    int nb_team = get_nb_team(av);
+
+    if (!my_malloc(info, nb_team))
+        return false;
+    info->nb_team = nb_team;
+    info->name_team[nb_team] = NULL;
+    for (int i = 0; i < nb_team; ++i) {
         if ((info->name_team[i] = strdup(av[i + 1])) == NULL) {
             perror("Failed malloc creation of different team");
             return (false);
         }
     }
-    if (!check_team_nbr(nb_team - 1) || !check_team_name(info->name_team))
+    if (!check_team_nbr(nb_team) || !check_team_name(info->name_team))
         return (false);
     return (true);
 }

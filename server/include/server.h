@@ -12,33 +12,69 @@ static const int FAILURE = 84;
 static const int SUCCESS = 0;
 static const int NB_CMD = 6;
 static const int MAX_MSG = 1024;
+#define UNUSED __attribute__((unused))
 
 #include <stdbool.h>
 #include <poll.h>
+#include <time.h>
 
-typedef struct client
-{
+enum ressource {
+    FOOD,
+    LINEMATE,
+    DERAUMERE,
+    SIBUR,
+    MENDIANE,
+    PHIRAS,
+    THYSTAME
+};
+
+typedef enum axe {
+    NORTH,
+    WEST,
+    EAST,
+    SOUTH
+} axe_t;
+
+typedef struct msg_queue {
+    char *msg;
+    clock_t time_end;
+} msg_queue_t;
+
+typedef struct client {
+    int sd;
     int x;
     int y;
+    char *team_name;
+    int index_map;
+    int inventory[7];
+    axe_t axe;
+    msg_queue_t msg_queue[10];
+    char *file;
 } client_t;
-
-typedef struct team
-{
-    char *name;
-    int nb_clt;
-    client_t *client;
-} team_t;
 
 typedef struct info_game {
     int sd;
     int port;
     int width;
     int heigth;
+    int *client_per_team;
     int nb_clt;
-    int freq;
     int nb_team;
+    int clt_tot;
+    int freq;
+    int nfds;
     char **name_team;
 } info_game_t;
+
+typedef struct map {
+    int x;
+    int y;
+    bool perso;
+    bool ress;
+    bool ground;
+    int inventory[7];
+    char *file;
+} map_t;
 
 typedef struct command {
     const char *name;
@@ -67,15 +103,18 @@ int print_usage(int );
 bool check_name(info_game_t *, char **);
 
 bool init_serv(info_game_t *);
-team_t  *fill_struct_team(info_game_t *);
 bool my_accept(int , int *);
-void free_struct(team_t *, int );
 
 int server(info_game_t *);
 void send_msg(int , char *);
 bool read_msg(int , char **);
 
-void handle_poll(struct pollfd *, int *, int );
 bool my_poll(struct pollfd *, int , int *, int );
+
+
+void handle_poll(struct pollfd *, info_game_t *, map_t *, client_t *);
+bool init_map(map_t *, info_game_t *);
+void free_map_info(map_t *, info_game_t *);
+bool check_new_clt(client_t *, map_t *, info_game_t *);
 
 #endif /* SERVER_H_ */

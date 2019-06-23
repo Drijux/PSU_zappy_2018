@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-void my_eject(team_t *team)
+bool my_eject(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    (void)team;
-    dprintf(1, "my_eject");
+    return (true);
 }

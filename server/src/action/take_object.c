@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-void take_object(team_t *team)
+bool take_object(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    (void)team;
-    dprintf(1, "take_object");
+    return (true);
 }

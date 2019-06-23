@@ -10,56 +10,105 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <SDL/SDL.h>
 #include "action.h"
 #include "print.h"
+#include "server.h"
 
-bool check_team(int sd, team_t *team, info_game_t *info, char *msg)
+static void free_clts(client_t *clients, int nb)
 {
-    for (int i = 0; i < info->nb_team; ++i) {
-        if (strncmp(team[i].name, msg, strlen(team[i].name) - 1) == 0
-            && info->nb_clt > 0) {
-            dprintf(1, "<--%d\n", info->nb_clt);
-            dprintf(sd, "<--%d\n", info->nb_clt);
-            return (true);
-        }
+    for (int i = 1; i < nb; ++i) {
+        if (clients[i].file != NULL)
+            free(clients[i].file);
+        if (clients[i].team_name != NULL)
+            free(clients[i].team_name);
     }
-    dprintf(1, "<--%d\n", info->nb_clt);
-    dprintf(sd, "<--%d\n", info->nb_clt);
-    return (false);
 }
 
-void handle_clt_poll(info_game_t *info
-    , __attribute__((unused ))team_t *team
-    , struct pollfd *fd)
+static void fill_struct_clts(client_t *clts, int nb)
 {
-    int length = (info->nb_clt * info->nb_team) + 1;
+    for (int i = 0; i < nb; ++i) {
+        clts[i].team_name = NULL;
+        clts[i].file = NULL;
+    }
+}
+
+// static void handle_clt_poll(info_game_t *info
+//     , struct pollfd *fd
+//     , map_t *map)
+// {
+//     int vl = 0;
+//     client_t clients[info->clt_tot + 1];
+//     clients[0].sd = fd[0].fd;
+//     SDL_Event event;
+
+//     fill_struct_clts(clients, (info->clt_tot + 1));
+//     while (true) {
+//         SDL_WaitEvent(&event);
+//         if (event.type == SDL_QUIT)
+//             break;
+//         if (my_poll(fd, info->nfds, &vl, 0))
+//             handle_poll(fd, info, map, clients);
+//     }
+//     free_clts(clients, (info->clt_tot + 1));
+// }
+static void handle_clt_poll(info_game_t *info
+    , struct pollfd *fd
+    , map_t *map)
+{
     int vl = 0;
-    int nfds = 1;
+    client_t clients[info->clt_tot + 1];
+    clients[0].sd = fd[0].fd;
+    // SDL_Event event;
 
+    fill_struct_clts(clients, (info->clt_tot + 1));
     while (true) {
-        if (my_poll(fd, nfds, &vl, 0))
-            handle_poll(fd, &nfds, length);
+        if (my_poll(fd, info->nfds, &vl, 0))
+            handle_poll(fd, info, map, clients);
     }
+    free_clts(clients, (info->clt_tot + 1));
 }
 
-static void run_serv(info_game_t *info)
+static void run_serv(info_game_t *info, map_t *map)
 {
     int length = (info->nb_clt * info->nb_team) + 1;
-    team_t *team = fill_struct_team(info);
     struct pollfd *fd = calloc(length, sizeof(struct pollfd));
 
+    info->clt_tot = length;
     fd[0].fd = info->sd;
     fd[0].events = POLLIN;
-    handle_clt_poll(info, team, fd);
-    free_struct(team, info->nb_team);
+    handle_clt_poll(info, fd, map);
 }
 
 int server(info_game_t *info)
 {
+    map_t map[info->heigth * info->width];
+
+    if (map == NULL || !init_map(map, info))
+        return (FAILURE);
     if (!init_serv(info))
         return (FAILURE);
-    run_serv(info);
+    run_serv(info, map);
     shutdown(info->sd, SHUT_RDWR);
     close(info->sd);
+    free_map_info(map, info);
     return (SUCCESS);
 }
+
+// int server(info_game_t *info)
+// {
+//     map_t map[info->heigth * info->width];
+
+//     if (map == NULL || !init_map(map, info))
+//         return (FAILURE);
+//     if (!init_serv(info) || SDL_Init(SDL_INIT_VIDEO) == -1)
+//         return (FAILURE);
+//     SDL_SetVideoMode(1280, 960, 32, SDL_HWSURFACE | SDL_RESIZABLE);
+//     SDL_WM_SetCaption("Zappy_Serveur", NULL);
+//     run_serv(info, map);
+//     shutdown(info->sd, SHUT_RDWR);
+//     close(info->sd);
+//     free_map_info(map, info);
+//     SDL_Quit();
+//     return (SUCCESS);
+// }

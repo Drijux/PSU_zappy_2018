@@ -2,14 +2,23 @@
 ** EPITECH PROJECT, 2018
 ** zappy_server
 ** File description:
-** foward.c
+** right.c
 */
 
 #include <stdio.h>
 #include "action.h"
 
-void right(team_t *team)
+bool right(client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    (void)team;
-    dprintf(1, "right");
+    if (clt->axe == NORTH)
+        clt->axe = EAST;
+    else if (clt->axe == SOUTH)
+        clt->axe = WEST;
+    else if (clt->axe == EAST)
+        clt->axe = SOUTH;
+    else
+        clt->axe = NORTH;
+    return (true);
 }

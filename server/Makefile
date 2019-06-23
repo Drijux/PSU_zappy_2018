@@ -23,7 +23,8 @@ SRC 			+= 	src/init_serv/init_serv.c 	\
 SRC 			+= 	src/server/server.c 		\
 					src/server/send_recv.c 		\
 					src/server/handle_poll.c 	\
-					src/server/my_poll.c
+					src/server/my_poll.c 		\
+					src/server/handle_clt.c
 
 SRC 			+= 	src/action/forward.c 		\
 					src/action/broadcast.c 		\
@@ -38,9 +39,14 @@ SRC 			+= 	src/action/forward.c 		\
 					src/action/left.c 			\
 					src/action/connect_nbr.c 	\
 
+# source to handle map
+SRC 			+= src/map/map.c
+
 OBJ				=	$(SRC:.c=.o)
 
-CPPFLAGS		+=	-I./include/
+CPPFLAGS		+=	-I./include/ -I/usr/local/include/
+
+LDFLAGS			= 	-L/usr/local/lib -lSDL
 
 CFLAGS			+=	-Wextra -Wall
 
@@ -48,7 +54,7 @@ CFLAGS			+=	-Wextra -Wall
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) -o $(NAME) $(OBJ)
+			$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 			cp $(NAME) ..
 
 clean:

@@ -23,10 +23,10 @@ bool handle_error(int ac, char **av, info_game_t *info)
         }
     }
     if (info->port <= 0 || info->heigth <= 0
-        || info->nb_clt <= 0)
+        || info->nb_clt <= 0 || info->width <= 0 || info->name_team == NULL)
         return (false);
-    if (info->width <= 0 || info->name_team == NULL)
-        return (false);
+    for (int i = 0; i < info->nb_team; ++i)
+        info->client_per_team[i] = info->nb_clt;
     return (true);
 }
 

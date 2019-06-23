@@ -9,5 +9,7 @@
 #define PRINT_H_
 
 #define WELCOME "WELCOME"
+#define GROUND "/home/rjules/Desktop/Projet_tech2/PSU_zappy_2018/server/include/sprite/ground.jpg"
+#define PERSO "/home/rjules/Desktop/Projet_tech2/PSU_zappy_2018/server/include/sprite/ground.jpg"
 
 #endif /* PRINT_H_ */

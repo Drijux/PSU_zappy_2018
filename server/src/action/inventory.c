@@ -8,8 +8,9 @@
 #include <stdio.h>
 #include "action.h"
 
-void inventory(team_t *team)
+bool inventory(UNUSED client_t *clt
+    , UNUSED map_t *map
+    , UNUSED info_game_t *info)
 {
-    (void)team;
-    dprintf(1, "inventory");
+    return (true);
 }

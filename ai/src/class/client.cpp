@@ -40,14 +40,10 @@ bool Client::createSocket(void)
 
 bool Client::connection(void)
 {
-    char buffer[1024];
-
     if (connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) == -1) {
 		perror("Client::connect : Failed to connect client");
         return (false);
 	}
-    read(_sock, buffer, strlen("WELCOME\n"));
-    dprintf(_sock, "%s\n", _team.c_str());
     return (true);
 }
 

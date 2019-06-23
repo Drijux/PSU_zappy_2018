@@ -26,7 +26,7 @@ OBJ				=	$(SRC:.cpp=.o)	\
 
 CPPFLAGS		+=	-I./include/ -I./include/class/
 
-CXXFLAGS		+=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-Wall -Wextra # -Werror
 
 
 all:		$(NAME)

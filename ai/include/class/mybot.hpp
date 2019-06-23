@@ -20,6 +20,8 @@ class Mybot
         int run(void);
         void look(void);
         char *sendMessage(std::string message);
+        void treat_msg(char *buf, int ret);
+        void early(char *buf);
 
     private:
         int _sock;

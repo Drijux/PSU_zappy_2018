@@ -29,6 +29,7 @@ static void fill_map_info(map_t *map, int y, int x)
     map->ress = false;
     map->ground = true;
     memset(map->inventory, 0, sizeof(map->inventory));
+    map->inventory[0] = 3;
     if ((map->file = strdup(GROUND)) == NULL)
         return;
 }

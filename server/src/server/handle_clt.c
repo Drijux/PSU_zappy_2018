@@ -24,6 +24,7 @@ static void get_new_pos(client_t *client, map_t *map, info_game_t *info)
             client->index_map = index;
             client->axe = axe;
             client->lvl = 1;
+            memset(map[client->index_map].inventory, 15, sizeof(client->inventory));
             memset(&client->inventory, 0, sizeof(client->inventory));
             client->inventory[0] = 10;
             map[index].ground = false;
@@ -49,10 +50,8 @@ static bool check_team(char *msg, info_game_t *info, int *save)
 static bool check_clt_in_team(client_t *clt, info_game_t *info, map_t *map, int save)
 {
     dprintf(clt->sd, "%d\n", info->client_per_team[save]);
-    if (info->client_per_team[save] < 1) {
-        close(clt->sd);
+    if (info->client_per_team[save] < 1)
         return (false);
-    }
     get_new_pos(clt, map, info);
     dprintf(clt->sd, "%d %d\n", info->width, info->heigth);
     info->client_per_team[save] -= 1;

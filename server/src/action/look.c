@@ -85,7 +85,8 @@ void check_mov(client_t *clt, map_t *map, int len, int i)
 
 bool look(client_t *clt
     , map_t *map
-    , UNUSED info_game_t *info)
+    , info_game_t *info
+    , UNUSED char *msg)
 {
     int len = 3;
     double time = 0;

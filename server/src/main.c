@@ -5,19 +5,16 @@
 ** main function of project
 */
 
-#include <string.h>
+#include <stdlib.h>
 #include "server.h"
 #include "usage.h"
 
 int main(int ac, char **av, char **envp)
 {
-    (void)av;
-    
-    if (ac == 2 && strcmp(av[1], "-help") == 0) {
-        help();
-        return (0);
-    }
-    if (!envp[0] || ac < 13)
-        return (MY_EXIT_ERROR);
-    return (MY_EXIT_SUCCESS);
+    info_game_t info;
+
+    srand(time(NULL));
+	if (!envp[0] || ac < 11 || !handle_error(ac - 1, av + 1, &info))
+		return (print_usage(FAILURE));
+    return (server(&info));
 }

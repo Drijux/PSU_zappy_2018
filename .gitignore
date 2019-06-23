@@ -1,5 +1,10 @@
 *.o
 *~
+vgcore.*
+test.c
+question.txt
+servertest
 
+.vscode
 zappy_server
 zappy_ai

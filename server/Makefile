@@ -7,31 +7,64 @@
 
 NAME			=	zappy_server
 
-SRC_DIR			= 	./src/
+SRC 			=	src/main.c
 
-SRC_FILES		=	main.c \
-					help.c
+# source of handle error
+SRC 			+= 	src/handle_error/handle_err.c 		\
+					src/handle_error/init_struct.c  	\
+					src/handle_error/check_arg_nb.c 	\
+					src/handle_error/check_arg_str.c
 
-SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+# source of initiation server
+SRC 			+= 	src/init_serv/init_serv.c 	\
+					src/init_serv/init_server.c
+
+# source to launch server
+SRC 			+= 	src/server/server.c 		\
+					src/server/send_recv.c 		\
+					src/server/handle_poll.c 	\
+					src/server/my_poll.c 		\
+					src/server/handle_clt.c
+
+SRC 			+= 	src/action/forward.c 		\
+					src/action/broadcast.c 		\
+					src/action/right.c 			\
+					src/action/incantation.c 	\
+					src/action/inventory.c 		\
+					src/action/look.c 			\
+					src/action/my_eject.c 		\
+					src/action/my_fork.c 		\
+					src/action/set_object.c 	\
+					src/action/take_object.c 	\
+					src/action/left.c 			\
+					src/action/connect_nbr.c 	\
+
+# source to handle map
+SRC 			+= src/map/map.c
+
+SRC 			+= src/msg_queue/msg_queue.c
 
 OBJ				=	$(SRC:.c=.o)
 
-CPPFLAGS		+=	-I./include/
+CPPFLAGS		+=	-I./include/ -I/usr/local/include/
 
-CFLAGS			+=	-Wextra -Wall -Werror
+LDFLAGS			= 	-L/usr/local/lib -lSDL
+
+CFLAGS			+=	-Wextra -Wall
 
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) -o $(NAME) $(OBJ)
-			mv $(NAME) ..
+			$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
+			cp $(NAME) ..
 
 clean:
 			$(RM) $(OBJ)
 
 fclean:		clean
 			$(RM) ../$(NAME)
+			$(RM) $(NAME)
 
 re:			fclean all
 

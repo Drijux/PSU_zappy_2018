@@ -2,55 +2,36 @@
 ** EPITECH PROJECT, 2019
 ** zappy_ai
 ** File description:
-** main function of project
+** main function of zappy_ai
 */
 
-#include <iostream>
 #include <string.h>
-#include "ai.hpp"
-#include "structure.hpp"
 
-void help()
+#include "parameter.hpp"
+#include "zappyai.hpp"
+#include "client.hpp"
+
+static int client(args_t *arguments)
 {
-	std::cout << "USAGE: ./zappy_ai -p port -n name -h machine" << std::endl;
-	std::cout << "       port    is the port number" << std::endl;
-	std::cout << "		 name    is the name of the team" << std::endl;
-	std::cout << "		 machine is the name of the machine: localhost par default" << std::endl;
+	Client client = Client(arguments);
+
+	return (client.launch());
 }
 
-arg_t parse_arg(char *av[])
+static int client_launcher(int ac, char **av)
 {
-	arg_t argument;
+	args_t *arguments = arg_parsing(ac, av);
 
-	for (int i = 0; av[i]; i++) {
-		if (strcmp(av[i], "-p") == 0) {
-			i++;
-			argument.port = av[i];
-		}
-		if (strcmp(av[i], "-n") == 0) {
-			i++;
-			argument.name = av[i];
-		}
-		if (strcmp(av[i], "-h") == 0) {
-			i++;
-			argument.machine = av[i];
-		}
-	}
-	return (argument);
+	if (!arguments)
+		return (FAILURE);
+	return (client(arguments));
 }
 
 int main(int ac, char **av, char **envp)
 {
-	arg_t argument;
-
-	if (ac == 2 && strcmp(av[1], "-help") == 0) {
-		help();
-		return (MY_EXIT_SUCCESS);
-	}
-	if (!envp[0] || ac != 7)
-		return (MY_EXIT_ERROR);
-	argument = parse_arg(av);
-	Client client(argument);
-	client.preorder();
-	return (MY_EXIT_SUCCESS);
+	if (ac == 2 && !strcmp(av[1], HELPFLAG))
+		return (help_display(av[0]));
+	if (envp[0] && ac == 7)
+		return (client_launcher(ac, av));
+	return (FAILURE);
 }

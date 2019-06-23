@@ -2,40 +2,44 @@
 // EPITECH PROJECT, 2019
 // zappy_ai
 // File description:
-// definition of Client class
+// Client class definition
 //
 
 #ifndef CLIENT_HPP_
 # define CLIENT_HPP_
 
-#include <string.h>
-#include <unistd.h>
 #include <iostream>
-#include <ostream>
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <string.h>
+
 #include "structure.hpp"
+#include "mybot.hpp"
 
 class Client
 {
     public:
-        Client(arg_t argument);
-        bool create_socket();
-        void create_sockaddr_in(std::string addr, int port);
+        Client(args_t *arguments);
+        ~Client(void);
+
+        int launch(void);
+        int startBot(void);
         bool connection(void);
-        bool loop(void);
-        bool preorder(void);
+        bool createSocket(void);
+        void createSockaddrIn(void);
 
     private:
-        int _sock;
-        std::string _addr;
         int _port;
+        std::string _addr;
         std::string _team;
+
+        int _sock;
         struct sockaddr_in _server;
 
     protected:
 };
-
 
 #endif /* CLIENT_HPP_ */
